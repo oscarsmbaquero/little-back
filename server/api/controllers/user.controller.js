@@ -9,7 +9,7 @@ const loginUser = async (req, res, next)=>{
             const { body } = req;
             console.log(body,60);
             // Comprobar email
-            const user = await User.findOne({ user: body.user });
+            const user = await User.findOne({ mail: body.mail });
             console.log(user,63);
         
             // Comprobar password
@@ -35,14 +35,16 @@ const loginUser = async (req, res, next)=>{
         
             // Response
             return res.json({
-            //   status: 200,
-            //   message: httpStatusCode[200],
-            //   data: {
-                // id: user._id,
+              status: 200,
+              message: httpStatusCode[200],
+              data: {
+                id: user._id,
+                mail: user.mail,
+                idUsuario: user.idUsuario,
+                tienda: user.tienda,
                 user: user.user,
-                //token: token,
                 
-            //   },
+              },
             });
           } catch (error) {
             console.log(error);
