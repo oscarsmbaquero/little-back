@@ -8,6 +8,7 @@ import { DB_URL, connect } from "./server/config/db.js";
 
 //IMPORTACION DE RUTAS
 import { userRoutes } from "./server/api/routes/users.routes.js";
+import { fichajesRoutes } from "./server/api/routes/fichajes.routes.js";
 
 
 //creo servidor express
@@ -29,9 +30,7 @@ server.use(cors('*'));
 
 //RUTAS
 server.use("/users", userRoutes);
-
-
-
+server.use("/fichajes", fichajesRoutes);
 
 server.use('*', (req, res, next) => {
   const error = new Error('Route not found');

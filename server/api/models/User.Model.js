@@ -1,25 +1,16 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const userSchema = new mongoose.Schema({
-  user: String,
+  id: String,
   mail: String,
   password: String,
   idUsuario: Number,
   tienda: String,
-  dia: String,
-  entrada: {
-    hora: String,
-    lat: Number,
-    lng: Number
-  },
-  salida: {
-    hora: String,
-    lat: Number,
-    lng: Number
-  }
+  user: String,
+  rol: String
 });
 
-const User = mongoose.model('User',userSchema );
+const User = mongoose.model("User", userSchema);
 
-export { User }
+export { User };
