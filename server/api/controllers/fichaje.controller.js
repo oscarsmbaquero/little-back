@@ -12,13 +12,14 @@ const createFichaje = async (req, res) => {
   }
 };
 
-const getFichajes = async (req, res) => {
+const getFichajesByUser = async (req, res) => {
   try {
-    const fichajes = await Fichajes.find();
+    const { idUsuario } = req.params;
+    let fichajes = await Fichajes.find({ idUsuario: idUsuario });
     res.status(200).json(fichajes);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-export { createFichaje, getFichajes };
+export { createFichaje, getFichajesByUser };
