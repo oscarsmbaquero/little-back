@@ -11,6 +11,22 @@ const createFichaje = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+const addSalidaFichaje = async (req, res) => {
+  try {
+    const { idUsuario, dia, salida } = req.body;
+    const fichajeExistente = await Fichajes.findOne({ idUsuario: idUsuario, dia: dia });
+
+    if (fichajeExistente) {
+      // Si existe, actualiza el campo 'salida'
+      fichajeExistente.salida = salida;
+      await fichajeExistente.save();
+      return res.status(200).json(fichajeExistente);
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 
 const getFichajesByUser = async (req, res) => {
   try {
@@ -32,4 +48,4 @@ const getFichajesByUserAndDate = async (req, res) => {
   }
 };
 
-export { createFichaje, getFichajesByUser, getFichajesByUserAndDate };
+export { createFichaje, getFichajesByUser, getFichajesByUserAndDate, addSalidaFichaje };

@@ -7,31 +7,29 @@ import { httpStatusCode } from "../../utils/httpStatusCode.js";
 const loginUser = async (req, res, next)=>{
     try {
             const { body } = req;
-            console.log(body,60);
             // Comprobar email
             const user = await User.findOne({ mail: body.mail });
-            console.log(user,63);
         
             // Comprobar password
             const isValidPassword = await bcrypt.compare(body.password, user?.password ?? '');
             // Control de LOGIN
-            // if (!user || !isValidPassword) {
-            //   const error = {
-            //     status: 401,
-            //     message: 'The email & password combination is incorrect!'
-            //   };
-            //   return next(error);
-            // }
+            if (!user || !isValidPassword) {
+              const error = {
+                status: 401,
+                message: 'The email & password combination is incorrect!'
+              };
+              return next(error);
+            }
         
-            // TOKEN JWT
-            // const token = jwt.sign(
-            //   {
-            //     id: user._id,
-            //     user: user.user,
-            //   },
-            //   req.app.get("secretKey"),
-            //   { expiresIn: "1h" }
-            // );
+           // TOKEN JWT
+            const token = jwt.sign(
+              {
+                id: user._id,
+                user: user.user,
+              },
+              req.app.get("secretKey"),
+              { expiresIn: "1h" }
+            );
         
             // Response
             return res.json({
