@@ -41,6 +41,7 @@ const loginUser = async (req, res, next)=>{
                 idUsuario: user.idUsuario,
                 tienda: user.tienda,
                 user: user.user,
+                rol : user.rol
                 
               },
             });
@@ -66,14 +67,14 @@ const loginUser = async (req, res, next)=>{
   };
 
 
-// const getUsers = async (req,res,next) =>{
-//   try {
-//       const users = await User.find();
-//       return res.status(200).json(users);
-//   } catch (error) {
-//       return next(error)        
-//   }
-// };
+const getUsers = async (req,res,next) =>{
+  try {
+      const users = await User.find();
+      return res.status(200).json(users);
+  } catch (error) {
+      return next(error)        
+  }
+};
 
 // const deleteUser = async (req, res, next) => {
 
@@ -250,4 +251,4 @@ const loginUser = async (req, res, next)=>{
 
 
 
-  export {  loginUser, logoutUser };
+  export {  loginUser, logoutUser, getUsers };
