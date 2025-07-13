@@ -11,7 +11,8 @@ import { loginUser, logoutUser, getUsers } from '../controllers/user.controller.
  userRoutes.get('/',getUsers);
  userRoutes.post('/login/',loginUser);
  userRoutes.post('/logout/',logoutUser);
- 
+ //PRUEBA COMMIT 2
+
 
 
 export { userRoutes };
